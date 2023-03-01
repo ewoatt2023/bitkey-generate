@@ -4,8 +4,9 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/btcsuite/btcutil"
 	"github.com/decred/dcrd/dcrec/secp256k1"
+	"github.com/btcsuite/btcutil"
+	"github.com/decred/dcrd/chaincfg"
 )
 
 func main() {
@@ -30,17 +31,12 @@ func main() {
 		_, public := secp256k1.PrivKeyFromBytes(padded)
 
 		// Get compressed and uncompressed addresses
-		caddr, _ := btcutil.NewAddressPubKey(public.SerializeCompressed(), &btcutil.AddressParams{
-			PubKeyHashAddrID: 0x00,
-			PrivateKeyID:     0x80,
-		})
-		uaddr, _ := btcutil.NewAddressPubKey(public.SerializeUncompressed(), &btcutil.AddressParams{
-			PubKeyHashAddrID: 0x00,
-			PrivateKeyID:     0x80,
-		})
+		caddr, _ := btcutil.NewAddressPubKey(public.SerializeCompressed(), &chaincfg.MainNetParams)
+		uaddr, _ := btcutil.NewAddressPubKey(public.SerializeUncompressed(), &chaincfg.MainNetParams)
 
 		// Print keys
 		fmt.Printf("%x %34s %34s\n", padded, uaddr.EncodeAddress(), caddr.EncodeAddress())
 	}
 }
+
 
