@@ -3,9 +3,8 @@ package main
 import (
 	"fmt"
 	"math/big"
-
+        "golang-github-btcsuite-btcd-btcec.git"
 	"github.com/btcsuite/btcutil"
-	"github.com/btcsuite/btcd/btcec"
 	"github.com/btcsuite/btcd/chaincfg"
 )
 
